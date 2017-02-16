@@ -51,7 +51,7 @@ var seckill = {
     //获取秒杀地址, 控制显示逻辑, 执行秒杀
     handleSeckillKill: function (seckillId,seckillBox) {
         seckillBox.hide().html('<button class="btn btn-primary btn-lg" id="killBtn">开始秒杀!</button>');
-        $.post(seckill.url.exposer(seckillId),{},function(result){
+        $.post(seckill.url.exposer(seckillId),{},function(result){//exposer
             if(result && result['success']){
                 var exposer = result['data'];
                 if(exposer['exposed']){
@@ -60,7 +60,7 @@ var seckill = {
                     console.log('killUrl = '+killUrl);//TODO
                     $('#killBtn').one('click',function(){ //执行秒杀请求
                         $(this).addClass('disabled');
-                        $.post(killUrl,{},function(result){
+                        $.post(killUrl,{},function(result){//execution
                            if(result && result['success']){
                                var killResult = result['data'];
                                var state = killResult['state'];
@@ -110,7 +110,7 @@ var seckill = {
             var startTime = params['startTime'];
             var endTime = params['endTime'];
             var seckillId = params['seckillId'];
-            $.get(seckill.url.now(),{},function(result) {
+            $.get(seckill.url.now(),{},function(result) {//now
                 if(result && result['success']){
                     var nowTime = result['data'];
                     seckill.countdown(seckillId,nowTime,startTime,endTime);//时间判断, 计时交互
